@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>peer js</title>
+<script>
+
+</script>
+
+</head>
+<body>
+    <style>
+    input{border:0;
+        background-color:#0062ff;
+        color:#fff;
+        border-radius:10px;
+        cursor:pointer;}
+      
+      input:hover{
+        color:#0062ff;
+        background-color:#fff;
+        border:2px #0062ff solid;
+      }
+
+      #remote{
+			vertical-align:text-top;
+		}
+
+    #local{
+		vertical-align:text-top;
+	}
+    </style>
+    
+    <span style="font-family:Microsoft JhengHei;" id="msg" >你的畫面:<video id="local" height="300"></video></span>
+    <span style="font-family:Microsoft JhengHei;" id="msg1" >對方的畫面:<video id="remote" height="300"></video><br></span><br>
+    
+     
+    
+    <span style="font-family:Microsoft JhengHei;" id="peercon">尚未配對</span><br> 
+    <span style="font-family:Microsoft JhengHei;" id="localpeerid">連結載入中...</span><br> 
+    <img id="qrcode" src="" alt="qrcode 載入中..."><br>
+    
+    <span style="font-family:Microsoft JhengHei;" id="urlid"></span><br>
+    <input type="button" id="useurl" style="width:150px;height:50px;" value="使用連結"><br>  
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
