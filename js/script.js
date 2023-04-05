@@ -16,6 +16,7 @@ const qrcode = document.getElementById("qrcode")
 const peercon = document.getElementById("peercon")
 const button = document.getElementById("button")
 const urltest = document.querySelector(".urltest")
+const errormsg = document.getElementById("errormsg")
 
 msg.style.visibility = 'hidden';
 
@@ -77,10 +78,12 @@ peer.on("call", call =>{
 });
 
 peer.on('error', function (err) {
+    errormsg.innerHTML = "錯誤資訊: " + err;
+    document.querySelector(".error").style.display = "flex";
+    msg.style.visibility = "hidden";
     button.style.display = "flex";
     document.querySelector(".urltest").style.display = "flex";
     console.log(err);
-    alert('' + err);
 });
 
 document.getElementById("button").addEventListener("click", function(){
@@ -95,3 +98,10 @@ document.querySelector(".close2").addEventListener("click", function(){
     document.querySelector(".urltest").style.display = "none";
 })
 
+document.querySelector(".close3").addEventListener("click", function(){
+    document.querySelector(".error").style.display = "none";
+})
+
+document.querySelector(".ok").addEventListener("click", function(){
+    document.querySelector(".error").style.display = "none";
+})
