@@ -5,49 +5,169 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>peer js</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 
 </script>
 
 </head>
 <body>
-    <style>
-    input{border:0;
-        background-color:#0062ff;
-        color:#fff;
-        border-radius:10px;
-        cursor:pointer;}
-      
-      input:hover{
-        color:#0062ff;
-        background-color:#fff;
-        border:2px #0062ff solid;
-      }
 
-      #remote{
+	<body style="background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)"></body>
+
+    <style type='text/css'>
+    	input{border:0;
+        	background-color:#0062ff;
+        	color:#fff;
+        	border-radius:10px;
+        	cursor:pointer;
+		}
+      
+    	input:hover{
+        	color:#0062ff;
+        	background-color:#fff;
+        	border:2px #0062ff solid;
+      	}
+
+    	#remote{
 			vertical-align:text-top;
 		}
 
-    #local{
-		vertical-align:text-top;
-	}
+    	#local{
+			vertical-align:text-top;
+		}
+
+  		.container{
+			position: absolute;
+			top: 50%; 
+			text-align: center;
+		}
+
+		.video{
+			border-radius: 30px;
+		}
+
+		.button{
+			background: rgb(255, 255, 255);
+			padding: 10px 15px;
+			color: darkblue;
+			font-weight: bolder;
+			text-transform: uppercase;
+			font-size: 18px;
+			border-radius:  10px;
+			box-shadow: 6px 6px 29px -4px rgba(0, 0, 0, 75);
+			font-family: Arial, Helvetica, sans-serif;
+			text-decoration: none;
+			transition: 0.4s;
+		}
+
+		.button:hover{
+			background: #34495e;
+			color: white;
+		}
+
+		.popup{
+			width: 99%;
+			height: 100%;
+			position: absolute;
+			top: 0%;
+			display: none;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.popup-content{
+			height: 350px;
+			width: 500px;
+			background: #fff;
+			padding: 20px;
+			border-radius: 30px;
+			position: relative;
+      		box-shadow: 6px 6px 29px rgba(0, 0, 0, 75);
+      		text-align:center;
+		}
+
+		.close{
+			position: absolute;
+			top: -20px;
+			right: -20px;
+			background: #fff;
+			height: 20px;
+			width: 20px;
+			border-radius: 50%;
+			box-shadow: 6px 6px 29px -4px rgba(0, 0, 0, 0.75);
+			cursor: pointer;
+		}
+
+
+    	.urltest{
+			width: 99%;
+			height: 100%;
+			position: absolute;
+			top: 0%;
+			display: none;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.urltest-content{
+			height: 350px;
+			width: 500px;
+			background: #fff;
+			padding: 20px;
+			border-radius: 30px;
+			position: relative;
+      		box-shadow: 6px 6px 29px rgba(0, 0, 0, 75);
+      		text-align:center;
+		}
+
+		.close2{
+			position: absolute;
+			top: -20px;
+			right: -20px;
+			background: #fff;
+			height: 20px;
+			width: 20px;
+			border-radius: 50%;
+			box-shadow: 6px 6px 29px -4px rgba(0, 0, 0, 0.75);
+			cursor: pointer;
+		}
+
+    
     </style>
     
-    <span style="font-family:Microsoft JhengHei;" id="msg" >你的畫面:<video id="local" height="300"></video></span>
-    <span style="font-family:Microsoft JhengHei;" id="msg1" >對方的畫面:<video id="remote" height="300"></video><br></span><br>
-    
-     
-    
-    <span style="font-family:Microsoft JhengHei;" id="peercon">尚未配對</span><br> 
-    <span style="font-family:Microsoft JhengHei;" id="localpeerid">連結載入中...</span><br> 
-    <img id="qrcode" src="" alt="qrcode 載入中..."><br>
-    
-    <span style="font-family:Microsoft JhengHei;" id="urlid"></span><br>
-    <input type="button" id="useurl" style="width:150px;height:50px;" value="使用連結"><br>  
+    <span style="font-family:Microsoft JhengHei;" id="msg" >你的畫面:<video id="local" height="300" class="video"></video></span>
+    <span style="font-family:Microsoft JhengHei;" id="msg1" >對方的畫面:<video id="remote" height="300" class="video"></video><br></span><br>
 
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+    <div class="container">
+      <a href="#" class="button" id="button">配對</a>
+    </div>
+  
+    <div class="popup">
+      <div class="popup-content">
+        <img src="img/close.png" alt="close" class="close">
+        <span style="font-family:Microsoft JhengHei;" id="peercon">未配對</span><br> 
+        <span style="font-family:Microsoft JhengHei;" id="localpeerid">連結載入中...</span><br> 
+        <img id="qrcode" src="" alt="qrcode 載入中..."><br>
+      </div>
+    </div>
+
+    <div class="urltest">
+      <div class="urltest-content">
+        <img src="img/close.png" alt="close" class="close2">
+        <span style="font-family:Microsoft JhengHei;">目前網址中包含連結:</span><br>
+        <span style="font-family:Microsoft JhengHei;" id="urlid"></span><br>
+        <span style="font-family:Microsoft JhengHei;">是否直接連接? 是請按 使用連結 ，否請忽略</span><br>
+        <input type="button" id="useurl" style="width:150px;height:50px;" value="使用連結"><br>  
+      </div>
+    </div>
+
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
+	<script src="js/firework.js"></script>
 </body>
 </html>
